@@ -1,0 +1,23 @@
+ version: "3.7"
+
+ services:
+  web:
+    container_name: app
+    build: app
+    ports:
+      - "4200:4200"
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    links:
+      - "back"
+  back:
+    container_name: backend
+    build: backend
+    ports:
+      - "3000:3000"
+    working_dir: /backend
+    volumes:
+      - ./backend:/backend
+  
+ 

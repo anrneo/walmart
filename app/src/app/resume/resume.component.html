@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+          Resumen
+        </div>
+        <div class="card-body">
+            <div class="card mb-3" *ngFor="let item of result">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img [src]="item.image" class="img-fluid rounded-start" width="50%" height="50%" alt="...">
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.brand}}</h5>
+                      <p class="card-text">{{item.description}}</p>
+                      <p class="card-text"><small class="text-muted">Cantidad: {{item.cart}}</small></p>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="badge rounded-pill bg-primary">{{item.total | currency:'USD'}}</span>
+                  </div>
+                </div>
+              </div>
+              <ul class="list-group">
+                <li class="text-primary" *ngIf="!discountBrand.discount || (discountBrand.discount && show)">
+                  Agrega <b> {{noDiscount.left | currency}}</b> mas en productos  <b>{{noDiscount.brand}}</b>
+                  y aprobecha un descuento total de  <b>{{noDiscount.total | currency}}</b>
+                </li>
+                <br>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <br>
+                  Subtotal de Productos
+                  <br>
+                  <span class="badge bg-primary rounded-pill">{{subtotal | currency}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <br>Descuento por Marca
+                  <br>
+                  <span class="badge bg-primary rounded-pill">{{discountBrand.discount | currency}}</span>
+                </li>
+                <li *ngIf="discountBrand.discount">
+                  Se aplico un descuento por marca de <b> {{discountBrand.discount | currency}}</b> por haber comprado al menos <b>{{discountBrand.threshold | currency}}</b>
+                  de la marca <b>{{discountBrand.brand}}</b>
+                </li>
+                <br>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <br><b> Total a Pagar</b><br>
+                  <span class="badge bg-primary rounded-pill">{{subtotal-discountBrand.discount | currency}}</span>
+                </li>
+              </ul>
+        </div>
+        <div class="card-footer text-muted">
+          
+        </div>
+      </div>
+      <br>
+      <button type="button" (click)="back()" class="btn btn-primary">Back</button>
+</div>

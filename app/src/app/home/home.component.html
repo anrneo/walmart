@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Lider Store</a>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+            <button type="button" class="btn btn-primary position-relative" (click)="isResume()">
+                <i class="material-icons">shopping_cart</i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{count}}+
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <br>
+    <app-resume *ngIf="seeResume" (newItemEvent)="back($event)" [result]="result" [subtotal]="subtotal" [show]="show" [discountBrand]="discountBrand" [noDiscount]="noDiscount"></app-resume>
+    <div class="row" *ngIf="!seeResume">
+      <br>
+        <div class="col-2">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"  (click)="searchBrand('All')"><a href="#">Todos</a></li>
+            <li class="list-group-item"  *ngFor="let disc of discounts" (click)="searchBrand(disc.brand)"><a href="#">{{disc.brand}}</a></li>
+          </ul>
+        </div>
+        <div class="col-10">
+          <div class="alert alert-warning" role="alert" *ngIf="alert">
+            Agrega productos al carrito de compras
+          </div>
+            
+                        <div class="row">
+                            <div class="col" *ngFor="let item of products;index as i">
+                                <div class="card" style="width: 13rem;" >
+                                    <img [src]="item.image" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                      <h6 class="card-title">{{item.description}}</h6>
+                                      <h5 class="card-title">{{item.brand}}</h5>
+                                      <p class="card-text">${{item.price}}</p>
+                                      <div class="container">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-outline-primary" (click)="checkCart(item,0,i)">-</button>
+                                            <button type="button" class="btn btn-outline-primary">{{item.cart}}</button>
+                                            <button type="button" class="btn btn-outline-primary" (click)="checkCart(item,1,i)">+</button>
+                                          </div>
+                                      </div>
+                                      
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                 
+            
+        </div>
+     
+      </div>
+  </div>
