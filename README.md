@@ -1,6 +1,7 @@
 # Walmart
 
 ## Entorno desarrollo 1
+## cd app
 ## npm i
 ## npm start
 ## cd backend
